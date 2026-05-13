@@ -18,6 +18,7 @@ jobs:
       
       - name: Install Dependencies
         run: npm install
+
       - name: Install Mocha
         run: npm install mocha --save-dev
 
@@ -25,7 +26,7 @@ jobs:
         run: npm test
 
       - name: SonarQube 
-        uses: Sonarsource/sonarqube-scan-action@v2
+        uses: SonarSource/sonarqube-scan-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.NODE_SONAR }}
           SONAR_HOST_URL: https://sonarcloud.io
@@ -34,7 +35,7 @@ jobs:
             -Dsonar.projectKey=${{ vars.PROJECT_NAME }} 
             -Dsonar.organization=${{ vars.ORG_NAME }} 
             -Dsonar.branch.name=dev 
-            -Dsonar.token=${SONAR_TOKEN} 
+  
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

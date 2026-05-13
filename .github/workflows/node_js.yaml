@@ -47,11 +47,25 @@ jobs:
             -Dsonar.organization=${{ vars.ORG_NAME }} 
             -Dsonar.branch.name=dev 
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+        
+       # Quality Gate     
+      - name: Sonar Quality Gate Check
+        uses: SonarSource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.NODE_SONAR }}
 
-      - name: Upload Artifact
+      - name: Upload Coverage Artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results-node-${{ matrix.node-version }}
-          path: .
+          name: coverage-report-node-${{ matrix.node-version }}
+          path: coverage/
+      
+      - name: Upload Application Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nodejs-app-${{ matrix.node-version }}
+          path: nodejs-app-${{ matrix.node-version }}
 

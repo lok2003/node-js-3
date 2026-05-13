@@ -23,10 +23,21 @@ jobs:
       - name: Run test
         run: npm test
 
+      - name: SonarQube 
+        uses: Sonarsource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.NODE_SONAR }}
+        with:
+          args: >
+            -Dsonar.projectKey=${{ vars.PROJECT_NAME }} \
+            -Dsonar.organization=${{ vars.ORG_NAME }} \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.branch.name=dev \
+            -Dsonar.token=${SONAR_TOKEN} 
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: nodejs-app
           path: .
 
-          

@@ -34,7 +34,7 @@ jobs:
         run: npm install nyc --save-dev
 
       - name: Run test Coverage
-        run: npm test coverage
+        run: npm run coverage
 
       - name: SonarQube 
         uses: SonarSource/sonarqube-scan-action@v2

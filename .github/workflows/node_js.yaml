@@ -14,7 +14,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 14
-         
+          cache: 'npm'
       
       - name: Install Dependencies
         run: npm install
@@ -31,9 +31,9 @@ jobs:
           SONAR_HOST_URL: https://sonarcloud.io
         with:
           args: >
-            -Dsonar.projectKey=${{ vars.PROJECT_NAME }} \ 
-            -Dsonar.organization=${{ vars.ORG_NAME }} \
-            -Dsonar.branch.name=dev \
+            -Dsonar.projectKey=${{ vars.PROJECT_NAME }} 
+            -Dsonar.organization=${{ vars.ORG_NAME }} 
+            -Dsonar.branch.name=dev 
             -Dsonar.token=${SONAR_TOKEN} 
 
       - name: Upload Artifact

@@ -14,6 +14,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 14
+          cache: 'npm'
       
       - name: Install Dependencies
         run: npm install
@@ -24,14 +25,14 @@ jobs:
         run: npm test
 
       - name: SonarQube 
-        uses: Sonarsource/sonarqube-scan-action@v5
+        uses: Sonarsource/sonarqube-scan-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.NODE_SONAR }}
+          SONAR_HOST_URL: https://sonarcloud.io
         with:
           args: >
-            -Dsonar.projectKey=${{ vars.PROJECT_NAME }} \
+            -Dsonar.projectKey=${{ vars.PROJECT_NAME }} \ 
             -Dsonar.organization=${{ vars.ORG_NAME }} \
-            -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.branch.name=dev \
             -Dsonar.token=${SONAR_TOKEN} 
 

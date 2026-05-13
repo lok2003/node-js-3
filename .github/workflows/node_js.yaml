@@ -30,8 +30,11 @@ jobs:
       - name: Install Mocha
         run: npm install mocha --save-dev
 
-      - name: Run test
-        run: npm test
+      - name: Install NYC
+        run: npm install nyc --save-dev
+
+      - name: Run test Coverage
+        run: npm test coverage
 
       - name: SonarQube 
         uses: SonarSource/sonarqube-scan-action@v2
@@ -43,7 +46,7 @@ jobs:
             -Dsonar.projectKey=${{ vars.PROJECT_NAME }} 
             -Dsonar.organization=${{ vars.ORG_NAME }} 
             -Dsonar.branch.name=dev 
-  
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
 
       - name: Upload Artifact
         if: always()

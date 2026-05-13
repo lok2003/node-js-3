@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint --ignore-path .gitignore .",
     "test": "mocha",
+    "coverage": "nyc --reporter=html --reporter=lcov --reporter=text mocha",
     "start": "node src",
     "cloudformation": "bash ./scripts/create-stacks.sh",
     "cloudformation-build": "aws cloudformation create-stack --stack-name node-app-codebuild-resources --template-body file://cloudformation-templates/code-build.yml --capabilities CAPABILITY_IAM --parameters file://cloudformation-templates/parameters.json",

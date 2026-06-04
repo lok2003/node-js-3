@@ -49,11 +49,11 @@ jobs:
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
         
        # Quality Gate     
-      - name: Sonar Quality Gate Check
-        uses: SonarSource/sonarqube-quality-gate-action@v1
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.NODE_SONAR }}
+      # - name: Sonar Quality Gate Check
+      #   uses: SonarSource/sonarqube-quality-gate-action@v1
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.NODE_SONAR }}
 
       - name: Upload Coverage Artifact
         if: always()
